@@ -1,5 +1,7 @@
 # Nexus DSA Student Management Portal
 
+### 🔗 Live Demo: [https://dsa-student-management-portal.vercel.app](https://dsa-student-management-portal.vercel.app)
+
 Welcome to the **Nexus DSA Student Management Portal**—a full-stack academic sandbox designed to demonstrate real-world applications of fundamental Data Structures and Algorithms (DSA) inside a modern high-performance Student Portal. 
 
 Unlike conventional portals that rely on standard built-in arrays, this portal is engineered from the ground up using **custom memory-efficient, mathematically sound data structures implemented in TypeScript**. It provides fully interactive, real-time visualizers to observe theoretical Big-O behaviors directly in the browser.
