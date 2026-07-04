@@ -1,0 +1,155 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Student {
+    int id;
+    char name[100];
+    char department[100];
+    int marks;
+    char group[100];
+    struct Student* next;
+    struct Student* prev;
+} Student;
+
+// Function to add a new student node to the list
+void addStudent(Student** head, int id, char* name, char* department, int marks, char* group) {
+    Student* newStudent = (Student*) malloc(sizeof(Student));
+    newStudent->id = id;
+    strcpy(newStudent->name, name);
+    strcpy(newStudent->department, department);
+    newStudent->marks = marks;
+    strcpy(newStudent->group, group);
+    newStudent->next = *head;
+    newStudent->prev = NULL;
+    if (*head!= NULL) {
+        (*head)->prev = newStudent;
+    }
+    *head = newStudent;
+}
+
+// Function to delete a student node from the list
+void deleteStudent(Student** head, int id) {
+    Student* current = *head;
+    while (current!= NULL) {
+        if (current->id == id) {
+            if (current->prev!= NULL) {
+                current->prev->next = current->next;
+            } else {
+                *head = current->next;
+            }
+            if (current->next!= NULL) {
+                current->next->prev = current->prev;
+            }
+            free(current);
+            return;
+        }
+        current = current->next;
+    }
+    printf("Student not found.\n");
+}
+
+// Function to display students by department
+void displayByDepartment(Student* head, char* department) {
+    Student* current = head;
+    printf("Students in %s department:\n", department);
+    while (current!= NULL) {
+        if (strcmp(current->department, department) == 0) {
+            printf("%d. %s - %d marks - %s group\n", current->id, current->name, current->marks, current->group);
+        }
+        current = current->next;
+    }
+}
+
+// Function to display students by marks
+void displayByMarks(Student* head, int marks) {
+    Student* current = head;
+    printf("Students with %d marks:\n", marks);
+    while (current!= NULL) {
+        if (current->marks == marks) {
+            printf("%d. %s - %s department - %s group\n", current->id, current->name, current->department, current->group);
+        }
+        current = current->next;
+    }
+}
+
+// Function to display students by 12th group
+void displayByGroup(Student* head, char* group) {
+    Student* current = head;
+    printf("Students in %s group:\n", group);
+    while (current!= NULL) {
+        if (strcmp(current->group, group) == 0) {
+            printf("%d. %s - %s department - %d marks\n", current->id, current->name, current->department, current->marks);
+        }
+        current = current->next;
+    }
+}
+
+// Function to display all students
+void displayAll(Student* head) {
+    Student* current = head;
+    printf("All students:\n");
+    while (current!= NULL) {
+        printf("%d. %s - %s department - %d marks - %s group\n", current->id, current->name, current->department, current->marks, current->group);
+        current = current->next;
+    }
+}
+
+int main() {
+    Student* head = NULL;
+    int choice;
+    char name[100], department[100], group[100];
+    int id, marks;
+
+    while (1) {
+        printf("1. Add student\n");
+        printf("2. Delete student\n");
+        printf("3. Display students by department\n");
+        printf("4. Display students by marks\n");
+        printf("5. Display students by 12th group\n");
+        printf("6. Display all students\n");
+        printf("7. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+switch (choice) {
+    case 1:
+        printf("Enter student ID: ");
+        scanf("%d", &id);
+        printf("Enter student name: ");
+        scanf("%s", name);
+        printf("Enter student department: ");
+        scanf("%s", department);
+        printf("Enter student marks: ");
+        scanf("%d", &marks);
+        printf("Enter student 12th group: ");
+        scanf("%s", group);
+        addStudent(&head, id, name, department, marks, group);
+        break;
+    case 2:
+        printf("Enter student ID to delete: ");
+        scanf("%d", &id);
+        deleteStudent(&head, id);
+        break;
+    case 3:
+        printf("Enter department: ");
+        scanf("%s", department);
+        displayByDepartment(head, department);
+        break;
+    case 4:
+        printf("Enter marks: ");
+        scanf("%d", &marks);
+        displayByMarks(head, marks);
+        break;
+    case 5:
+        printf("Enter 12th group: ");
+        scanf("%s", group);
+        displayByGroup(head, group);
+        break;
+    case 6:
+        displayAll(head);
+        break;
+    case 7:
+        exit(0);
+    default:
+        printf("Invalid choice. Please try again.\n");
+}}}
