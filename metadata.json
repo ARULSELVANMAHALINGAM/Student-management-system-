@@ -1,0 +1,6 @@
+{
+  "name": "DSA Student Management Portal",
+  "description": "An interactive student management system featuring custom data structure and algorithm implementations (Trie, Graph Dijkstra, Heap, custom HashMap) with real-time visualizers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
